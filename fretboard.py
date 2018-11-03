@@ -39,21 +39,55 @@ def quiz(note,guess):
 		print("\033[31mIncorrect.\033[0m Note is {}".format(note))
 	input("Hit enter to continue... ")
 
+def fret_mode():
+	while 1:
+		fret   = random.randint(0,22)
 
-while 1:
+		for string in [6,5,4,3,2,1]:
+			os.system('clear')
+			print("Fret mode")
+			note = get_note(string,fret)
+
+			print("\033[90m            3       5       7       9           12          15      17      19      21\033[0m")
+			for j in range(1,7):
+				out = disp_string(j)
+				if j==string: 
+					if fret==0:
+						out[1]=mark
+					else:
+						out[2+fret*4-3]=mark
+				print("".join(out))
+			quiz(note,input("Note? "))
+
+def random_mode():
+	while 1:
+		os.system('clear')
+		print("Random mode")
+		fret   = random.randint(0,22)
+		string = random.randint(1,6)	
+		note = get_note(string,fret)
+
+		print("\033[90m            3       5       7       9           12          15      17      19      21\033[0m")
+		for j in range(1,7):
+			out = disp_string(j)
+			if j==string: 
+				if fret==0:
+					out[1]=mark
+				else:
+					out[2+fret*4-3]=mark
+			print("".join(out))
+		quiz(note,input("Note? "))
+
+
+if __name__ == '__main__':
 	os.system('clear')
-	string = random.randint(1,6)
-	fret   = random.randint(0,22)
-	note = get_note(string,fret)
+	print("=== FRETBOARD QUIZ ===")
+	print("1) Random Mode")
+	print("2) Fret Node")
+	mode = input("Select Mode (1,2): ")
 
-	print("\033[90m            3       5       7       9           12          15      17      19      21\033[0m")
-	for j in range(1,7):
-		out = disp_string(j)
-		if j==string: 
-			if fret==0:
-				out[1]=mark
-			else:
-				out[2+fret*4-3]=mark
-		print("".join(out))
-	quiz(note,input("Note? "))
-	#print(string_names[string],fret,get_note(string,fret))
+	if mode == '1':
+		random_mode()
+	else:
+		fret_mode()
+
