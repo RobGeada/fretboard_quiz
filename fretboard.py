@@ -37,7 +37,7 @@ def quiz(note,guess):
 		print("\033[32mCorrect!\033[0m Note is {}".format(note))
 	else:
 		print("\033[31mIncorrect.\033[0m Note is {}".format(note))
-	input("enter to continue")
+	input("Hit enter to continue... ")
 
 
 while 1:
